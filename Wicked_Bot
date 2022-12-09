@@ -1,0 +1,24 @@
+import praw
+
+# Set up a new Reddit instance
+reddit = praw.Reddit(client_id='YOUR_CLIENT_ID',
+                     client_secret='YOUR_CLIENT_SECRET',
+                     user_agent='YOUR_USER_AGENT')
+
+# Authenticate with Reddit using your bot's credentials
+reddit.auth.authorize()
+
+# Set up a variable to hold the subreddit where you want to post the scores
+subreddit = reddit.subreddit('COLLEGEBASKETBALL')
+
+# Retrieve the latest college basketball scores
+# (You will need to find a source for the scores and write code to retrieve them here)
+scores = get_latest_scores()
+
+# Format the scores as a string to post as a comment on Reddit
+comment_text = 'Latest college basketball scores:\n\n'
+for team, score in scores:
+    comment_text += f'{team}: {score}\n'
+
+# Post the comment on Reddit
+subreddit.submit(title='Latest Scores', selftext=comment_text)
